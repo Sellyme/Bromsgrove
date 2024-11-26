@@ -2,14 +2,6 @@
 #(you can just double-click the keyword and then Ctrl+V to ensure it's done correctly)
 csv_data = '''PASTE_HERE'''
 
-import math
-
-def cube_root(x):
-	return round(x**(1./3)) #do we allow non-integer cube roots?
-
-def reverse_pow(power, value):
-	return pow(value,power)
-
 def check_valid(calc, datestr):
 	#we gave to check digits before substituting in the freebie power/root operators
 	digits_used = ''.join(filter(str.isdigit,calc))
@@ -19,11 +11,6 @@ def check_valid(calc, datestr):
 	calc = calc.replace("=","==") #convert equality test
 	calc = calc.replace("^","**") #convert exponentiation
 	calc = calc.replace(",","") #remove commas, since they may be used legitimately
-	#freebie expressions banned
-	#calc = calc.replace("SQR("," math.sqrt(") #handle square roots (todo: does the float output here hurt us?)
-	#calc = calc.replace("CRT("," cube_root(") #handle cube roots
-	#calc = calc.replace("S("," reverse_pow(2,") #handle freebie squares
-	#calc = calc.replace("C("," reverse_pow(3,") #handle freebie cubes
 	calc = calc.replace("x", "*").replace("×", "*") #convert incorrect multiply symbol
 	calc = calc.replace("[","(").replace("]",")") #convert incorrect parentheses
 	calc = calc.replace("{","(").replace("}",")") #convert incorrect parentheses
