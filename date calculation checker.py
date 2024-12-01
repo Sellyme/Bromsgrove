@@ -55,7 +55,9 @@ for line in lines:
 	if data[0].strip("\"") == "Timestamp":
 		continue #skip header row
 	datestamp = data[0].split(" ")[0] #should always be of form 2024/11/22
-	datestr = datestamp[9:11] + datestamp[6:8] + datestamp[3:5]
+	#we strip leading zeroes from day/month, so "2024/01/30" becomes "30124"
+	#this is just done to keep things a bit interesting for balance of the competition
+	datestr = datestamp[9:11].lstrip("0") + datestamp[6:8].lstrip("0") + datestamp[3:5]
 	
 	student = data[1].strip("\"").upper()
 	if student not in students:
