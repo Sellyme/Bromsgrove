@@ -2,6 +2,8 @@
 #(you can just double-click the keyword and then Ctrl+V to ensure it's done correctly)
 csv_data = '''PASTE_HERE'''
 
+import re
+
 def check_valid(calc, datestr):
 	#we gave to check digits before substituting in the freebie power/root operators
 	digits_used = ''.join(filter(str.isdigit,calc))
@@ -14,6 +16,10 @@ def check_valid(calc, datestr):
 	calc = calc.replace("x", "*").replace("×", "*") #convert incorrect multiply symbol
 	calc = calc.replace("[","(").replace("]",")") #convert incorrect parentheses
 	calc = calc.replace("{","(").replace("}",")") #convert incorrect parentheses
+	
+	#check for extra pluses
+	if re.match("[*\/\+-]\+",calc) or re.match("\+[*\/\+-]", calc):
+		return False #unnecessary pluses
 	
 	#print(calc) #DEBUG
 	
